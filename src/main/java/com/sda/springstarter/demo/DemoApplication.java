@@ -5,6 +5,7 @@ import com.sda.springstarter.demo.interfaces.BookService;
 import com.sda.springstarter.demo.model.Author;
 import com.sda.springstarter.demo.model.Book;
 import com.sda.springstarter.demo.repository.AuthorRepository;
+import com.sda.springstarter.demo.service.AuthorServiceImpl;
 import com.sda.springstarter.demo.service.BookServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -17,9 +18,11 @@ import java.util.Optional;
 public class DemoApplication implements CommandLineRunner{
 
 	@Autowired
-	private BookServiceImpl bookService;
+	private BookServiceImpl bookService;  //Spring Data samo stworzy implementację naszego BookServiceImpl i wstrzyknie ją w tym miejscu.
 	@Autowired
 	private AuthorRepository authorRepository;
+	@Autowired
+	private AuthorServiceImpl authorService;
 
 	public static void main(String[] args) {
 
@@ -28,28 +31,14 @@ public class DemoApplication implements CommandLineRunner{
 
 	@Override
 	public void run(String... args) throws Exception {
-
-//		Book book1 = new Book("Tytul", "Autor");
-//		Book book2 = new Book("Tytul2", "Autor2");
-//
-//
-		Author author = authorRepository.findById(1);
-		Book book = new Book();
-		book.setTitle("Java dla bystrzakow");
-		//book.setBookAuthor(author);
-		bookService.saveBook(book);
-
-		Optional<Author> author1 = authorRepository.getAuthorsByName("Anna"); //todo
-		Book book1 = new Book();
-
-
-//
-//
-//
-//		bookService.saveBook(book1);
-//		bookService.saveBook(book2);
-//
+//		Author author = authorRepository.findById(1);
+//		Book book = new Book();
+//		book.setTitle("Java");
+//		book.setBookAuthor(author);
 //		bookService.saveBook(book);
+//		author.setLastname("Adamkiewicz");
+//		author.setName("Adam");
+//		authorService.saveAuthor(author);
 
 	}
 }

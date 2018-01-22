@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <title>you work on 9999 port</title>
+</head>
+
+
+
+<body>
+<form>
+    Tytul:
+    <input id="title" type="text">
+    <input type="button" id="dodaj" value="Dodaj">
+
+</form>
+
+
+<script>
+    $(document).ready(function(){
+
+        console.log("Działa");
+        $.ajax({
+            type: 'GET',
+            url: 'http://localhost:8080/books',
+            success: function (result) {
+                console.log(result);
+                $.each(result, function (key, value) {
+                    console.log(key);
+
+                    if (!jQuery.isEmptyObject(value.bookCategory)) {
+                        console.log(value.bookCategory.name); //to bookCategory to jest odniesienie do nazwy w przeglądarce, która się wyświetla, tak samo name po kropce, to jest wejście do środka ta kropka
+                    }
+                    console.log(value['title']);
+                    $("ul").append("<li>" + value['title'] + "</li>");
+
+                    // console.log(value['addres']);
+                    // $("ul").append("<li>" + value['addres'] + "</li>");
+                });
+
+
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+        $("#dodaj").click(function () {
+            var title = $("#title").val();
+            console.log(title);
+
+            $.ajax({
+                type: 'POST',
+                url: 'http://localhost:8080/books',
+                data: JSON.stringify({
+                    "title": $("#title").val()
+                }),
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+
+                success:function (response) {
+                    console.log("Sukces:"+ response);
+                },
+                error: function (xhr) {
+                    console.log("Error :(" + xhr.responseText);
+                }
+
+            })
+
+        });
+    });
+
+
+
+</script>
+</body>
+</html>

@@ -1,6 +1,8 @@
 package com.sda.springstarter.demo.model;
 
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*; //ten pakiet musi być by prawidłowo ID brało
 import java.util.Set;
 
@@ -14,9 +16,10 @@ public class Publisher {
     private String name;
     private String address;
 
-    @OneToMany(mappedBy = "publisher")
+    @OneToMany(mappedBy = "publisher", cascade = CascadeType.ALL)
     private Set<Book> book;
    // private Book book;
+
 
     public Publisher() {
     }

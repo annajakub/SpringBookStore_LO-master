@@ -16,14 +16,14 @@ public class Book {
     private String author;
 
     //relacje
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "book_publisher_id")
     private Publisher publisher;
 
     @ManyToOne
     private BookCategory bookCategory;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL) //po dodaniu tu kaskadowości, addBook działa
     private Author bookAuthor;
 
     public Book() {
@@ -33,6 +33,8 @@ public class Book {
         this.title = title;
         this.author = author;
     }
+
+
 
     public Author getBookAuthor() {
         return bookAuthor;

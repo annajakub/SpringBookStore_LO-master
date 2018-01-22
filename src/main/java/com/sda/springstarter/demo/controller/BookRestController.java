@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/books") //TYLKO 1 RAZ WYWOŁUJE
+@RestController //@Controller - oznaczamy nią kontrolery, tj. klasy, które będą obsługiwały zapytania
+// wysyłane poprzez przeglądarkę od użytkowników.
+@RequestMapping("/books") // Raz wywołuje. Wszystkie metody tej klasy, które mają także adnotacje @RequestMapping, są tak jakby prefiksowane
 public class BookRestController {
 
     @Autowired
@@ -28,8 +29,8 @@ public class BookRestController {
     @Autowired
     private PublisherServiceImpl publisherService;
 
-    @CrossOrigin(value = "http://localhost:9999") //dajemy dostęp tej metodzie na tym porcie
-    @RequestMapping(method = RequestMethod.GET) //TYLKO 1 RAZ WYWOŁUJE
+    @CrossOrigin(value = "http://localhost:9999") //dajemy dostęp metodzie na tym porcie
+    @RequestMapping(method = RequestMethod.GET) //Wskazujemy, że ta metoda będzie uruchomiona,jeśli użytkownik wpisze konkretny adres URL
     public List<Book> getAllBooks() {
         return bookService.getAllBooks();
     }
@@ -49,12 +50,9 @@ public class BookRestController {
         return publisherService.getAllPublishers();
     }
 
-    //przez JASONa wysyłamy dane do
 
-    //  @RequestMapping(value = "/addnewbook", method = RequestMethod.POST)  DLA NOWYCH METOD RÓZNICUJEMY VALUE
-    //POBIERANIE I DODAWANIE DODAĆ
     @CrossOrigin(value = "http://localhost:9999")
-    @RequestMapping(method = RequestMethod.POST) //POST TO AKTUALIZACJA
+    @RequestMapping(method = RequestMethod.POST) //AKTUALIZACJA
     public void saveBook(@RequestBody Book book) {
         bookService.saveBook(book);
     }

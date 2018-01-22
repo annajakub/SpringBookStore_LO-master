@@ -16,7 +16,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Service //stereotyp który wskazuje, że ta klasa jest serwisem,
+// tzn. oferuje pewną logikę biznesową którą będziemy wykorzystywać w innych miejscach (np. kontrolerach)
 public class AuthorServiceImpl implements AuthorService {
 
 

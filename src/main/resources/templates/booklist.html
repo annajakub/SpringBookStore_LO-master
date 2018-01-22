@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+<h2 th:text="${message}"></h2>
+    <style>
+        table, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 10px;
+        }
+    </style>
+
+    <h1>Lista ksiazek!!!</h1>
+
+    <table>
+        <tr>
+            <th>Tytul ksiazki</th>
+            <th>Autor</th>
+            <th>Wydawnictwo</th>
+        </tr>
+        <tr th:each="book : ${books}">
+            <td th:text="${book.getTitle()}"></td>
+            <td th:text="${book.getAuthor()}"></td>
+            <td th:text="${book.getPublisher().getName()}"></td>
+
+        </tr>
+    </table>
+
+
+        <form action="#" th:action="@{/addbook}" th:object="${book}" method="post">
+            <p>Nazwa ksiazki: <input type="text" th:field="*{title}" /></p>
+            <p>Autor: <input type="text" th:field="*{bookAuthor.name}" /></p>
+            <label>Podaj kategorie</label>
+            <select th:field="*{bookCategory.id}">
+                <option th:each="cat : ${categories}"
+                        th:value="${cat.getId()}"
+                        th:text="${cat.getName()}"></option>
+            </select>
+
+        <label>Podaj wydawnictwo</label>
+        <select th:field="*{publisher.id}">
+            <option th:each="pub : ${publishers}"
+                    th:value="${pub.getId()}"
+                    th:text="${pub.getName()}" ></option>
+        </select>
+
+            <p><input type="submit" value="Submit"/>
+                <input type="reset" value="Reset"/>
+            </p>
+        </form>
+
+</div>
+</body>
+</html>

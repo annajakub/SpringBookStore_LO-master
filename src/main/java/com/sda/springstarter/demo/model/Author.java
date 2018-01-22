@@ -18,7 +18,8 @@ public class Author {
     private String lastname;
     private String address;
 
-    @OneToMany(mappedBy = "bookAuthor", cascade = CascadeType.ALL) //1 autor posiada wiele książek, więc tworzymy listę ksiązek. Mapujemy, czyli wskazujemy pole z którym ma się połączyć, czyli z bookAuthor
+    @OneToMany(mappedBy = "bookAuthor", cascade = CascadeType.ALL) //1 autor posiada wiele książek, więc tworzymy listę ksiązek.
+    // Mapujemy, czyli wskazujemy pole z którym ma się połączyć, czyli z bookAuthor
     private Set<Book> books;  //zbior książek
 
 //    public Set<Book> getBooks() {
